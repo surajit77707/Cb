@@ -34,6 +34,8 @@ async def must_join_channel(app: Client, msg: Message):
                     await msg.stop_propagation()
                 except ChatWriteForbidden:
                     pass
+            except PeerIdInvalid:
+                pass
     except PeerIdInvalid:
         pass
     except ChatAdminRequired:
