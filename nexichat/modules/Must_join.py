@@ -8,6 +8,8 @@ from config import UPDATE_CHNL as MUST_JOIN
 async def must_join_channel(app: Client, msg: Message):
     if not MUST_JOIN:
         return
+    if not msg.from_user:
+        return
     try:
         try:
             await app.get_chat_member(MUST_JOIN, msg.from_user.id)
