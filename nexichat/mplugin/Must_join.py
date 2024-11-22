@@ -8,6 +8,8 @@ from config import UPDATE_CHNL as MUST_JOIN
 async def must_join_channel(client: Client, msg: Message):
     if not MUST_JOIN:
         return
+    if not msg.from_user:
+        return
     try:
         try:
             m = msg.from_user.id
