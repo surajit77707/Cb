@@ -32,14 +32,14 @@ async def must_join_channel(client: Client, msg: Message):
                             [[InlineKeyboardButton("๏ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ ๏", url=link)]]
                         ),
                     )
-                    await msg.stop_propagation()
+                    return
                 except ChatWriteForbidden:
-                    await msg.stop_propagation()
+                    return
                 except Exception as e:
-                    await msg.stop_propagation()
+                    return
             except PeerIdInvalid:
-                await msg.stop_propagation()
+                return
     except PeerIdInvalid:
-        await msg.stop_propagation()
+        return
     except ChatAdminRequired:
         print(f"๏ᴘʀᴏᴍᴏᴛᴇ ᴍᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ᴍᴜsᴛ_Jᴏɪɴ ᴄʜᴀᴛ ๏: {MUST_JOIN} !")
