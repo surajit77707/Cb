@@ -38,7 +38,6 @@ from nexichat.idchatbot.helpers import (
 )
 
 from pyrogram import Client, filters
-from pyrogram.types import Chat, User, Channel
 from datetime import datetime
 import time
 
@@ -207,7 +206,69 @@ async def ping(client: Client, message: Message):
         
         await add_served_chat(message.chat.id)
 
+@Client.on_message(filters.command("stats", prefixes=[".", "/"]))
+async def stats(client, message):
+    ok = await message.reply("Fetching statistics...")
+    start_time = time.time()
+    private_chats = 0
+    bots = 0
+    groups = 0
+    broadcast_channels = 0
+    admin_in_groups = 0
+    creator_in_groups = 0
+    admin_in_broadcast_channels = 0
+    creator_in_channels = 0
+    unread_mentions = 0
+    unread = 0
+    admingroupids = []
+    broadcastchannelids = []
 
+    async for dialog in client.get_dialogs():
+        entity = dialog.chat
+        if entity.type == "channel" and entity.is_broadcast:
+            broadcast_channels += 1
+            if entity.creator or entity.admin_rights:
+                admin_in_broadcast_channels += 1
+                broadcastchannelids.append(entity.id)
+            if entity.creator:
+                creator_in_channels += 1
+        elif entity.type == "group" or entity.type == "supergroup":
+            groups += 1
+            if entity.creator or entity.admin_rights:
+                admin_in_groups += 1
+                admingroupids.append(entity.id)
+            if entity.creator:
+                creator_in_groups += 1
+        elif entity.type == "private":
+            private_chats += 1
+            if entity.is_bot:
+                bots += 1
+        unread_mentions += dialog.unread_mentions_count
+        unread += dialog.unread_count
+
+    stop_time = time.time() - start_time
+    full_name = message.from_user.first_name
+    date = str(datetime.now().strftime("%B %d, %Y, %H:%M"))
+    response = f"📌 **Stats for {full_name}** \n\n"
+    response += f"**Private Chats:** {private_chats} \n"
+    response += f"   ★ `Users: {private_chats - bots}` \n"
+    response += f"   ★ `Bots: {bots}` \n"
+    response += f"**Groups:** {groups} \n"
+    response += f"**Channels:** {broadcast_channels} \n"
+    response += f"**Admin in Groups:** {admin_in_groups} \n"
+    response += f"   ★ `Creator: {creator_in_groups}` \n"
+    response += f"   ★ `Admin Rights: {admin_in_groups - creator_in_groups}` \n"
+    response += f"**Admin in Channels:** {admin_in_broadcast_channels} \n"
+    response += f"   ★ `Creator: {creator_in_channels}` \n"
+    response += (
+        f"   ★ `Admin Rights: {admin_in_broadcast_channels - creator_in_channels}` \n"
+    )
+    response += f"**Unread:** {unread} \n"
+    response += f"**Unread Mentions:** {unread_mentions} \n\n"
+    response += f"📌 __It Took:__ {stop_time:.02f}s \n"
+    await ok.edit(response)
+
+'''
 @Client.on_message(filters.command("stats", prefixes=[".", "/"]))
 async def stats(client, message):
     ok = await message.reply("Fetching statistics...")
@@ -275,7 +336,7 @@ async def stats(client, message):
     response += f"**Unread Mentions:** {unread_mentions} \n\n"
     response += f"📌 __It Took:__ {stop_time:.02f}s \n"
     await ok.edit(response)
-    
+    '''
 from pyrogram.enums import ParseMode
 
 from nexichat import nexichat
