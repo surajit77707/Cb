@@ -14,7 +14,7 @@ async def must_join_channel(app: Client, msg: Message):
         try:
             await app.get_chat_member(MUST_JOIN, msg.from_user.id)
         except PeerIdInvalid:
-                await msg.stop_propagation()
+                return
         except UserNotParticipant:
             try:
                 if MUST_JOIN.isalpha():
@@ -35,12 +35,12 @@ async def must_join_channel(app: Client, msg: Message):
                     )
                     await msg.stop_propagation()
                 except ChatWriteForbidden:
-                    await msg.stop_propagation()
+                    return
                 except Exception as e:
-                    await msg.stop_propagation()
+                    return
             except PeerIdInvalid:
-                await msg.stop_propagation()
+                return
     except PeerIdInvalid:
-        await msg.stop_propagation()
+        return
     except ChatAdminRequired:
         print(f"๏ᴘʀᴏᴍᴏᴛᴇ ᴍᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ᴍᴜsᴛ_Jᴏɪɴ ᴄʜᴀᴛ ๏: {MUST_JOIN} !")
