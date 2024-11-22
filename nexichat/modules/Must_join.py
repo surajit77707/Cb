@@ -33,6 +33,6 @@ async def must_join_channel(app: Client, msg: Message):
                 except ChatWriteForbidden:
                     pass
             except PeerIdInvalid:
-                pass  
+                pass  # Silently handle PeerIdInvalid without logging
     except ChatAdminRequired:
         print(f"๏ᴘʀᴏᴍᴏᴛᴇ ᴍᴇ ᴀs ᴀɴ ᴀᴅᴍɪɴ ɪɴ ᴛʜᴇ ᴍᴜsᴛ_Jᴏɪɴ ᴄʜᴀᴛ ๏: {MUST_JOIN} !")
