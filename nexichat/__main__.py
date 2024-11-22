@@ -22,7 +22,9 @@ async def anony_boot():
             LOGGER.info(f"@{nexichat.username} Started, please start the bot from owner id.")
     
         asyncio.create_task(restart_bots())
+        print("Restarting all cloned botsbin background")
         asyncio.create_task(restart_idchatbots())
+        print("Restarting all id chatbot in background")
         await load_clone_owners()
         if config.STRING1:
             try:
@@ -36,7 +38,7 @@ async def anony_boot():
                 print(f"Error in starting id-chatbot :- {ex}")
                 pass
     except Exception as ex:
-        LOGGER.error(ex)
+        print(f"Error in starting Bot:- {ex}")
 
     for all_module in ALL_MODULES:
         importlib.import_module("nexichat.modules." + all_module)
