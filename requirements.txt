@@ -1,10 +1,10 @@
 Abg==2.3.1
-pyrogram==2.0.106
+git+https://github.com/KurimuzonAkuma/pyrogram@dev
 pymongo
 motor
 requests
 dnspython
-tgcrypto==1.2.2
+tgcrypto
 asyncio
 python-dotenv
 lexica-api
