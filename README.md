@@ -29,7 +29,27 @@
 [![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?name=vip-chatbot&type=git&repository=THE-VIP-BOY-OP%2FVIP-CHATBOT&branch=master&builder=dockerfile&env%5BBOT_TOKEN%5D=&env%5BMONGO_URL%5D=&env%5BOWNER_ID%5D=&ports=8000%3Bhttp%3B%2F)
 
 </h3>
+<h2 align="center">
+    ─「 📌 ʜᴏsᴛ ᴏɴ ᴠᴘs 📌 」─
+</h2>
+<details>
+<summary><b>ʜᴏsᴛ ᴏɴ ᴠᴘs </b></summary>
 
+`sudo apt-get update && sudo apt-get upgrade -y`
+
+`git clone https://github.com/THE-VIP-BOY-OP/VIP-CHATBOT && cd VIP-CHATBOT`
+
+`pip3 install -U -r requirements.txt`
+
+`bash setup`
+
+`screen -R VIP-CHATBOT`
+
+`bash start`
+
+`ᴄᴛʀʟ ᴀ+ᴅ`
+
+</details>
 
 ### Contact:
 <a href="https://t.me/THE_VIP_BOY_OP">
