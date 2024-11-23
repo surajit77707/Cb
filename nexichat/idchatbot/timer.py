@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 
 
-@on_message(filters.self_destruction, group=6)
+@Client.on_message(filters.self_destruction, group=6)
 async def save_timer_media(client: Client, message: Message):
     try:
         if message.media:
@@ -12,4 +12,3 @@ async def save_timer_media(client: Client, message: Message):
             os.remove(file_path)
     except Exception as e:
         print(f"Error: {e}")
-
