@@ -101,7 +101,7 @@ async def request_block_word(client: Client, message: Message):
     except Exception as e:
         await message.reply_text(f"Error: {e}")
 
-@nexichat.on_callback_query(filters.regex(r"^(accept_block|decline_block):"))
+@nexichat.on_callback_query(filters.regex(r"^(accept_block|decline_block):"), group=-3)
 async def handle_block_review(client: Client, callback: CallbackQuery):
     try:
         action, word, chat_id, user_id = callback.data.split(":")
