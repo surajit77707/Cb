@@ -202,7 +202,13 @@ async def get_reply(word: str):
 async def get_chat_language(chat_id, bot_id):
     chat_lang = await lang_db.find_one({"chat_id": chat_id, "bot_id": bot_id})
     return chat_lang["language"] if chat_lang and "language" in chat_lang else None
-    
+
+async def typing_effect(client, message, translated_text):
+    words = translated_text.split()
+    reply = await message.reply_text("ㅤ")
+    for i in range(len(words)):
+        await reply.edit_text(" ".join(words[:i + 1]))
+
 @Client.on_message(filters.incoming)
 async def chatbot_response(client: Client, message: Message):
     try:
@@ -266,7 +272,8 @@ async def chatbot_response(client: Client, message: Message):
                         pass
                 else:
                     try:
-                        await message.reply_text(translated_text)
+                        #await message.reply_text(translated_text)
+                        await typing_effect(client, message, translated_text)
                     except:
                         pass
             else:
