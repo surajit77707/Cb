@@ -219,11 +219,9 @@ async def get_reply(word: str):
     return random.choice(relevant_replies) if relevant_replies else None
 
 
-import asyncio
-
 async def typing_effect(client, message, translated_text):
     words = translated_text.split()
-    reply = await message.reply_text("🫣")
+    reply = await message.reply_text("ㅤ")
     for i in range(len(words)):
         await reply.edit_text(" ".join(words[:i + 1]))
 
