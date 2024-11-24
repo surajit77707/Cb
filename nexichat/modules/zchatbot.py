@@ -77,7 +77,7 @@ async def request_block_word(client: Client, message: Message):
         chat_id = message.chat.id
         user_id = message.from_user.id
         username = f"@{message.from_user.username}" if message.from_user.username else f"`{user_id}`"
-        message_id = message.message_id
+        message_id = message.id
 
         review_message = (
             f"**Block Request Received From {message.from_user.mention}**\n\n"
