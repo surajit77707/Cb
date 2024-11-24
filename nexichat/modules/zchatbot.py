@@ -61,17 +61,62 @@ async def is_abuse_present(text: str):
     text_lower = text.lower()
     return any(word in text_lower for word in abuse_list) or any(word in text_lower for word in abuse_cache)
 
-@nexichat.on_message(filters.command("block") & filters.user(OWNER_ID))
-async def block_word(client: Client, message: Message):
+@nexichat.on_message(filters.command("block"))
+async def request_block_word(client: Client, message: Message):
     try:
-        if len(message.command) < 2:
-            await message.reply_text("**Usage:** `/block <word>`\nAdd a word to the abuse list.")
+        if message.reply_to_message and message.reply_to_message.text:
+            new_word = message.reply_to_message.text.split()[0].lower()
+        elif len(message.command) >= 2:
+            new_word = message.command[1].lower()
+        else:
+            await message.reply_text("**Usage:** Reply to a message or use `/block <word>` to request blocking a word.")
             return
-        new_word = message.command[1].lower()
-        await add_abuse_word(new_word)
-        await message.reply_text(f"**Word '{new_word}' added to abuse list!**")
+
+        chat_name = message.chat.title if message.chat.title else "Private Chat"
+        chat_username = f"@{message.chat.username}" if message.chat.username else "No Username"
+        chat_id = message.chat.id
+        user_id = message.from_user.id
+        username = f"@{message.from_user.username}" if message.from_user.username else f"`{user_id}`"
+        message_id = message.message_id
+
+        review_message = (
+            f"**Block Request Received From {message.from_user.mention}**\n\n"
+            f"**Word:** `{new_word}`\n"
+            f"**Chat Name:** {chat_name}\n"
+            f"**Chat ID:** `{chat_id}`\n"
+            f"**Chat Username:** {chat_username}\n"
+            f"**Requested By:** {username}\n"
+            f"**Message ID:** `{message_id}`\n"
+        )
+
+        buttons = InlineKeyboardMarkup([
+            [
+                InlineKeyboardButton("✅ Accept", callback_data=f"accept_block:{new_word}:{chat_id}:{user_id}"),
+                InlineKeyboardButton("❌ Decline", callback_data=f"decline_block:{new_word}:{chat_id}:{user_id}")
+            ]
+        ])
+
+        await client.send_message(OWNER_ID, review_message, reply_markup=buttons)
+        await message.reply_text(f"**Hey** {message.from_user.mention}\n\n**Your block request has been sent to owner for review.**")
     except Exception as e:
         await message.reply_text(f"Error: {e}")
+
+@nexichat.on_callback_query(filters.regex(r"^(accept_block|decline_block):"))
+async def handle_block_review(client: Client, callback: CallbackQuery):
+    try:
+        action, word, chat_id, user_id = callback.data.split(":")
+        user_id = int(user_id)
+        chat_id = int(chat_id)
+
+        if action == "accept_block":
+            await add_abuse_word(word)
+            await callback.message.edit_text(f"✅ **Word '{word}' has been added to the abuse list.**")
+            await client.send_message(chat_id, f"**Hello dear bot users,**\nThe word '{word}' has been approved by my owner for blocking and now added to blocklist.**\n\n**Thanks For Support, You can block more abusing type words by /block**")
+        elif action == "decline_block":
+            await callback.message.edit_text(f"❌ **Block request for the word '{word}' has been declined.**")
+            await client.send_message(chat_id, f"**The block request for '{word}' has been declined by the Owner.**")
+    except Exception as e:
+        await callback.message.reply_text(f"Error: {e}")
 
 @nexichat.on_message(filters.command("unblock") & filters.user(OWNER_ID))
 async def unblock_word(client: Client, message: Message):
