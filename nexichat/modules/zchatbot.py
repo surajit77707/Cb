@@ -159,24 +159,20 @@ async def remove_abusive_reply(reply_data):
     await chatai.delete_one(reply_data)
     replies_cache = [reply for reply in replies_cache if reply != reply_data]
 
+
 async def get_reply(word: str):
     global replies_cache
     if not replies_cache:
         await load_replies_cache()
-
+        
     relevant_replies = [reply for reply in replies_cache if reply['word'] == word]
-
-    if not relevant_replies:
-        relevant_replies = replies_cache
-
-    safe_replies = []
     for reply in relevant_replies:
         if reply.get('text') and await is_abuse_present(reply['text']):
             await remove_abusive_reply(reply)
-        else:
-            safe_replies.append(reply)
+    if not relevant_replies:
+        relevant_replies = replies_cache
+    return random.choice(relevant_replies) if relevant_replies else None
 
-    return random.choice(safe_replies) if safe_replies else None
 
 async def get_chat_language(chat_id):
     chat_lang = await lang_db.find_one({"chat_id": chat_id})
