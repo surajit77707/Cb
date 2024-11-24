@@ -111,7 +111,7 @@ async def handle_block_review(client: Client, callback: CallbackQuery):
         if action == "accept_block":
             await add_abuse_word(word)
             await callback.message.edit_text(f"✅ **Word '{word}' has been added to the abuse list.**")
-            await client.send_message(chat_id, f"**Hello dear bot users,**\nThe word '{word}' has been approved by my owner for blocking and now added to blocklist.**\n\n**Thanks For Support, You can block more abusing type words by /block**")
+            await client.send_message(chat_id, f"**Hello dear bot users,**\n**The word:- [ '{word}' ], has been approved by my owner for blocking and now added to blocklist.**\n\n**Thanks For Support, You can block more abusing type words by /block**")
         elif action == "decline_block":
             await callback.message.edit_text(f"❌ **Block request for the word '{word}' has been declined.**")
             await client.send_message(chat_id, f"**The block request for '{word}' has been declined by the Owner.**")
