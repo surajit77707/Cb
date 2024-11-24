@@ -126,7 +126,7 @@ async def edit_or_reply(msg: Message, **kwargs):
 @Client.on_edited_message(
     filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot
 )
-@Client5.on_message(filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot)
+@Client.on_message(filters.command("sh") & filters.user(OWNER_ID) & ~filters.forwarded & ~filters.via_bot)
 async def shellrunner(_, message: Message):
     if len(message.command) < 2:
         return await edit_or_reply(message, text="<b>ᴇxᴀᴍᴩʟᴇ :</b>\n/sh git pull")
