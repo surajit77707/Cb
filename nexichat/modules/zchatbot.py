@@ -223,7 +223,7 @@ import asyncio
 
 async def typing_effect(client, message, translated_text):
     words = translated_text.split()
-    reply = await message.reply_text("")
+    reply = await message.reply_text("🫣")
     for word in words:
         await client.edit_message_text(reply.chat.id, reply.message_id, " ".join(words[:words.index(word) + 1]))
         await asyncio.sleep(0.01)
