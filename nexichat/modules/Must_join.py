@@ -27,7 +27,7 @@ async def must_join_channel(app: Client, msg: Message):
                         photo="https://envs.sh/Tn_.jpg",
                         caption=(
                             f"**👋 ʜᴇʟʟᴏ {msg.from_user.mention},**\n\n"
-                            f"**ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ᴛʜᴇ [ᴄʜᴀɴɴᴇʟ]({link}) ᴛᴏ sᴇɴᴅ ᴍᴇssᴀɢᴇs ɪɴ ᴛʜɪs ʙᴏᴛ.**"
+                            f"**ʏᴏᴜ ɴᴇᴇᴅ ᴛᴏ ᴊᴏɪɴ ᴛʜᴇ [ᴄʜᴀɴɴᴇʟ](https://t.me/The_Incricible) ᴛᴏ sᴇɴᴅ ᴍᴇssᴀɢᴇs ɪɴ ᴛʜɪs ʙᴏᴛ.**"
                         ),
                         reply_markup=InlineKeyboardMarkup(
                             [[InlineKeyboardButton("๏ ᴊᴏɪɴ ᴄʜᴀɴɴᴇʟ ๏", url=link)]]
