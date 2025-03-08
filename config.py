@@ -4,19 +4,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_ID = "6435225"
-# -------------------------------------------------------------
-API_HASH = "4e984ea35f854762dcde906dce426c2d"
-# --------------------------------------------------------------
-BOT_TOKEN = getenv("BOT_TOKEN", None)
+API_ID = int(getenv("API_ID", 23967991))
+API_HASH = getenv("API_HASH", "a2c3ccfaff4c2dbbff7d54981828d4f1")
+BOT_TOKEN = getenv("BOT_TOKEN", "7622375739:AAFbGHtzGhAcSx_ZsEYI1d9rnWxCjMXhNVU")
 STRING1 = getenv("STRING_SESSION", None)
-MONGO_URL = getenv("MONGO_URL", None)
-OWNER_ID = int(getenv("OWNER_ID", "7520092354"))
-UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/yourtoofan/CHATBOT")
+MONGO_URL = getenv("MONGO_URL", "mongodb+srv://xmen7151:xmen7151@cluster0.4h4js.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+OWNER_ID = int(getenv("OWNER_ID", "7638575366"))
+UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/surajit77707/Cb")
 UPSTREAM_BRANCH = getenv("UPSTREAM_BRANCH", "main")
-SUPPORT_GRP = "THE_INCRICIBLE"
-UPDATE_CHNL = "THE_INCRICIBLE"
-OWNER_USERNAME = "LEGEND_MICKEY"
+SUPPORT_GRP = getenv("SUPPORT_GRP", "UmbrellaUCorp")
+UPDATE_CHNL = getenv("UPDATE_CHNL", "moviiieeeesss")
+OWNER_USERNAME = getenv("OWNER_USERNAME", "Panda_spammer")
 # GIT TOKEN ( if your edited repo is private)
 GIT_TOKEN = getenv("GIT_TOKEN", "")
-    
