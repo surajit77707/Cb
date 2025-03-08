@@ -50,9 +50,9 @@ async def anony_boot():
             commands=[
                 BotCommand("start", "Start the bot"),
                 BotCommand("help", "Get the help menu"),
-                BotCommand("clone", "Make your own chatbot"),
-                BotCommand("idclone", "Make your id-chatbot"),
-                BotCommand("cloned", "Get List of all cloned bot"),
+                #BotCommand("clone", "Make your own chatbot"),
+                #BotCommand("idclone", "Make your id-chatbot"),
+                #BotCommand("cloned", "Get List of all cloned bot"),
                 BotCommand("ping", "Check if the bot is alive or dead"),
                 BotCommand("lang", "Select bot reply language"),
                 BotCommand("chatlang", "Get current using lang for chat"),
@@ -64,7 +64,7 @@ async def anony_boot():
                 BotCommand("status", "Check chatbot enable or disable in chat"),
                 BotCommand("shayri", "Get random shayri for love"),
                 BotCommand("ask", "Ask anything from chatgpt"),
-                BotCommand("repo", "Get chatbot source code"),
+                #BotCommand("repo", "Get chatbot source code"),
             ]
         )
         LOGGER.info("Bot commands set successfully.")
