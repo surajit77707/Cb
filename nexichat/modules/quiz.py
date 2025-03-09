@@ -9,7 +9,7 @@ from nexichat import nexichat
 last_command_time = {}
 
 
-@app.on_message(filters.command(["quiz"]))
+@nexichat.on_message(filters.command(["quiz"]))
 async def quiz(client, message):
     user_id = message.from_user.id
     current_time = time.time()
@@ -23,7 +23,7 @@ async def quiz(client, message):
     last_command_time[user_id] = current_time
 
     categories = [9, 17, 18, 20, 21, 27]
-    await app.send_chat_action(message.chat.id, ChatAction.TYPING)
+    await nexichat.send_chat_action(message.chat.id, ChatAction.TYPING)
 
     url = f"https://opentdb.com/api.php?amount=1&category={random.choice(categories)}&type=multiple"
     response = requests.get(url).json()
@@ -37,7 +37,7 @@ async def quiz(client, message):
     random.shuffle(all_answers)
 
     cid = all_answers.index(correct_answer)
-    await app.send_poll(
+    await nexichat.send_poll(
         chat_id=message.chat.id,
         question=question,
         options=all_answers,
