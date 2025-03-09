@@ -73,16 +73,15 @@ async def shayri(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "✨𝚂𝚄𝙿𝙿𝙾𝚁𝚃✨", url=f"https://t.me/THE_INCRICIBLE"
+                        "✨𝕊𝕌ℙℙ𝕆ℝ𝕋✨", url="https://t.me/moviiieeeesss"
                     ),
                     InlineKeyboardButton(
-                        "✨𝙾𝙵𝙵𝙸𝙲𝙴✨", url=f"https://t.me/THE_INCRICIBLE"
+                        "✨ℂℍ𝔸ℕℕ𝔼𝕃✨", url="https://t.me/UmbrellaUCorp"
                     ),
                 ]
             ]
         ),
     )
-
 
 
 add_buttons = InlineKeyboardMarkup(
