@@ -4,7 +4,7 @@ from pyrogram.enums import ChatMembersFilter
 
 from pyrogram.errors import FloodWait
 
-from ANNIEMUSIC import app
+from nexichat import nexichat
 
 
 SPAM_CHATS = []
@@ -13,7 +13,7 @@ SPAM_CHATS = []
 async def is_admin(chat_id, user_id):
     admin_ids = [
         admin.user.id
-        async for admin in app.get_chat_members(
+        async for admin in nexichat.get_chat_members(
             chat_id, filter=ChatMembersFilter.ADMINISTRATORS
         )
     ]
@@ -22,7 +22,7 @@ async def is_admin(chat_id, user_id):
     return False
 
 
-@app.on_message(
+@nexichat.on_message(
     filters.command(["all", "allmention", "mentionall", "tagall"], prefixes=["/", "@"])
 )
 async def tag_all_users(_, message):
@@ -45,7 +45,7 @@ async def tag_all_users(_, message):
         usertxt = ""
         try:
             SPAM_CHATS.append(message.chat.id)
-            async for m in app.get_chat_members(message.chat.id):
+            async for m in nexichat.get_chat_members(message.chat.id):
                 if message.chat.id not in SPAM_CHATS:
                     break
                 if m.user.is_deleted or m.user.is_bot:
@@ -78,7 +78,7 @@ async def tag_all_users(_, message):
             usertxt = ""
             text = message.text.split(None, 1)[1]
             SPAM_CHATS.append(message.chat.id)
-            async for m in app.get_chat_members(message.chat.id):
+            async for m in nexichat.get_chat_members(message.chat.id):
                 if message.chat.id not in SPAM_CHATS:
                     break
                 if m.user.is_deleted or m.user.is_bot:
@@ -86,7 +86,7 @@ async def tag_all_users(_, message):
                 usernum += 1
                 usertxt += f"[{m.user.first_name}](tg://user?id={m.user.id})  "
                 if usernum == 7:
-                    await app.send_message(
+                    await nexichat.send_message(
                         message.chat.id,
                         f"{text}\n{usertxt}",
                         disable_web_page_preview=True,
@@ -95,7 +95,7 @@ async def tag_all_users(_, message):
                     usernum = 0
                     usertxt = ""
             if usernum != 0:
-                await app.send_message(
+                await nexichat.send_message(
                     message.chat.id,
                     f"{text}\n\n{usertxt}",
                     disable_web_page_preview=True,
@@ -124,7 +124,7 @@ async def tag_all_admins(_, message):
         usertxt = ""
         try:
             SPAM_CHATS.append(message.chat.id)
-            async for m in app.get_chat_members(
+            async for m in nexichat.get_chat_members(
                 message.chat.id, filter=ChatMembersFilter.ADMINISTRATORS
             ):
                 if message.chat.id not in SPAM_CHATS:
@@ -158,7 +158,7 @@ async def tag_all_admins(_, message):
         try:
             text = message.text.split(None, 1)[1]
             SPAM_CHATS.append(message.chat.id)
-            async for m in app.get_chat_members(
+            async for m in nexichat.get_chat_members(
                 message.chat.id, filter=ChatMembersFilter.ADMINISTRATORS
             ):
                 if message.chat.id not in SPAM_CHATS:
@@ -168,7 +168,7 @@ async def tag_all_admins(_, message):
                 usernum += 1
                 usertxt += f"[{m.user.first_name}](tg://user?id={m.user.id})  "
                 if usernum == 7:
-                    await app.send_message(
+                    await nexichat.send_message(
                         message.chat.id,
                         f"{text}\n{usertxt}",
                         disable_web_page_preview=True,
@@ -177,7 +177,7 @@ async def tag_all_admins(_, message):
                     usernum = 0
                     usertxt = ""
             if usernum != 0:
-                await app.send_message(
+                await nexichat.send_message(
                     message.chat.id,
                     f"{text}\n\n{usertxt}",
                     disable_web_page_preview=True,
@@ -190,7 +190,7 @@ async def tag_all_admins(_, message):
             pass
 
 
-@app.on_message(
+@nexichat.on_message(
     filters.command(["admin", "admins", "report"], prefixes=["/", "@"]) & filters.group
 )
 async def admintag_with_reporting(client, message):
@@ -219,7 +219,7 @@ async def admintag_with_reporting(client, message):
     reply = message.reply_to_message or message
     reply_user_id = reply.from_user.id if reply.from_user else reply.sender_chat.id
     linked_chat = (await client.get_chat(chat_id)).linked_chat
-    if reply_user_id == app.id:
+    if reply_user_id == nexichat.id:
         return await message.reply_text("Why would I report myself?")
     if (
         reply_user_id in admins
@@ -241,7 +241,7 @@ async def admintag_with_reporting(client, message):
     await reply.reply_text(text)
 
 
-@app.on_message(
+@nexichat.on_message(
     filters.command(
         [
             "stopmention",
