@@ -2,7 +2,7 @@ import random
 
 from pyrogram import filters
 
-from ANNIEMUSIC import app
+from nexichat import nexichat
 
 
 def get_random_message(love_percentage):
@@ -32,7 +32,7 @@ def get_random_message(love_percentage):
         )
 
 
-@app.on_message(filters.command("love", prefixes="/"))
+@nexichat.on_message(filters.command("love", prefixes="/"))
 def love_command(client, message):
     command, *args = message.text.split(" ")
     if len(args) >= 2:
@@ -45,7 +45,7 @@ def love_command(client, message):
         response = f"{name1}💕 + {name2}💕 = {love_percentage}%\n\n{love_message}"
     else:
         response = "Please enter two names after /love command."
-    app.send_message(message.chat.id, response)
+    nexichat.send_message(message.chat.id, response)
 
 
 __MODULE__ = "Lᴏᴠᴇ"
