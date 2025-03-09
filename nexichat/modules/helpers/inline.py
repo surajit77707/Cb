@@ -6,12 +6,6 @@ from nexichat import OWNER, nexichat
 
 START_BOT = [
     [
-        InlineKeyboardButton(
-            text="😍 ᴀᴅᴅ ᴍᴇ ɪɴ ʏᴏᴜʀ ɢʀᴏᴜᴘ 😍",
-            url=f"https://t.me/{nexichat.username}?startgroup=true",
-        ),
-    ],
-    [
         InlineKeyboardButton(text="🥀 ᴏᴡɴᴇʀ 🥀", user_id=OWNER),
         InlineKeyboardButton(text="✨ ꜱᴜᴘᴘᴏʀᴛ ✨", url=f"https://t.me/{SUPPORT_GRP}"),
     ],
