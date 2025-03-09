@@ -51,7 +51,7 @@ EMOJIOS = [
     "🕊",
 ]
 
-BOT = "https://envs.sh/IL_.jpg"
+BOT = "https://envs.sh/Sle.jpg"
 IMG = [
     
 "https://envs.sh/Slu.jpg",
@@ -121,10 +121,10 @@ async def welcomejej(client, message: Message):
                         chat.photo.big_file_id, file_name=f"chatpp{chat.id}.png"
                     )
                     chat_photo = (
-                        groups_photo if groups_photo else "https://envs.sh/IL_.jpg"
+                        groups_photo if groups_photo else "https://envs.sh/Sle.jpg"
                     )
                 except AttributeError:
-                    chat_photo = "https://envs.sh/IL_.jpg"
+                    chat_photo = "https://envs.sh/Sle.jpg"
                 except Exception as e:
                     pass
 
