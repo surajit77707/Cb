@@ -1,13 +1,13 @@
 import requests
 from pyrogram import filters
 
-from ANNIEMUSIC import app
+from nexichat import nexichat
 
 truth_api_url = "https://api.truthordarebot.xyz/v1/truth"
 dare_api_url = "https://api.truthordarebot.xyz/v1/dare"
 
 
-@app.on_message(filters.command("truth"))
+@nexichat.on_message(filters.command("truth"))
 def get_truth(client, message):
     try:
         response = requests.get(truth_api_url)
@@ -24,7 +24,7 @@ def get_truth(client, message):
         )
 
 
-@app.on_message(filters.command("dare"))
+@nexichat.on_message(filters.command("dare"))
 def get_dare(client, message):
     try:
         response = requests.get(dare_api_url)
