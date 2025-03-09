@@ -8,10 +8,8 @@ from nexichat import ID_CHATBOT
 from pyrogram import idle
 from pyrogram.types import BotCommand
 from config import OWNER_ID
-from nexichat import LOGGER, nexichat, userbot, load_clone_owners
+from nexichat import LOGGER, nexichat, userbot
 from nexichat.modules import ALL_MODULES
-from nexichat.modules.Clone import restart_bots
-from nexichat.modules.Id_Clone import restart_idchatbots
 
 async def anony_boot():
     try:
