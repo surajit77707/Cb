@@ -1,10 +1,9 @@
 import random
 import requests
 import time
-
 from pyrogram import filters
 from pyrogram.enums import PollType, ChatAction
-from ANNIEMUSIC import app
+from nexichat import nexichat
 
 
 last_command_time = {}
